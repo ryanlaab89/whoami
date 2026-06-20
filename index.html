@@ -689,6 +689,60 @@
       transition: width 0.1s linear;
     }
 
+    /* ── CARD SPOTLIGHT + TILT ── */
+    .skill-group, .edu-card { will-change: transform; }
+
+    .skill-group::after,
+    .edu-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%),
+                  rgba(0, 212, 232, 0.13), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+      pointer-events: none;
+    }
+
+    .skill-group:hover::after,
+    .edu-card:hover::before { opacity: 1; }
+
+    /* ── TIMELINE DRAW-ON-SCROLL ── */
+    .timeline::before {
+      transform: scaleY(0);
+      transform-origin: top;
+      transition: transform 1.3s ease;
+    }
+
+    .timeline.drawn::before { transform: scaleY(1); }
+
+    .timeline-item.visible .timeline-dot {
+      border-color: var(--cyan);
+      box-shadow: 0 0 10px var(--cyan);
+    }
+
+    /* ── BOOT INTRO ── */
+    #boot {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: var(--navy);
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-start;
+      padding: clamp(2rem, 12vh, 8rem) 2.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--cyan);
+      line-height: 1.9;
+      white-space: pre;
+      transition: opacity 0.5s ease;
+    }
+
+    #boot.done { opacity: 0; }
+    .boot-inner { max-width: 720px; }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 700px) {
       nav { padding: 1rem 1.25rem; }
@@ -870,6 +924,22 @@
     </div>
 
     <div class="timeline">
+
+      <div class="timeline-item reveal reveal-delay-1">
+        <div class="timeline-dot"></div>
+        <div class="timeline-meta">
+          <span class="timeline-role">Founder & Full-Stack Engineer</span>
+          <span class="timeline-company">Shepherd (Side Project)</span>
+          <span class="timeline-period">2026 – Present</span>
+        </div>
+        <ul class="timeline-bullets">
+          <li>Building a multi-tenant SaaS Kids Ministry check-in platform for churches — replacing paper-based child registration and attendance with pickup-code workflows</li>
+          <li>Backend in Laravel 13 / PHP 8.4 exposing a GraphQL API (Lighthouse) over PostgreSQL, with a service-layer architecture and Sanctum token auth</li>
+          <li>Architected automatic per-tenant data isolation, scoping every query to the authenticated church</li>
+          <li>React 18 + Vite frontend (Tailwind + Shadcn/UI, Apollo Client) with a feature-based structure and print-ready check-in labels</li>
+          <li>Containerized local dev with Docker Compose; git submodules splitting backend and frontend repos</li>
+        </ul>
+      </div>
 
       <div class="timeline-item reveal reveal-delay-1">
         <div class="timeline-dot"></div>
@@ -1082,6 +1152,23 @@
         }
       }
 
+      // lines reaching toward the cursor
+      if (mouse.x > 0) {
+        for (let i = 0; i < COUNT; i++) {
+          const dx = particles[i].x - mouse.x;
+          const dy = particles[i].y - mouse.y;
+          const d  = Math.sqrt(dx*dx + dy*dy);
+          if (d < 175) {
+            ctx.beginPath();
+            ctx.strokeStyle = `rgba(${CYAN}, ${0.28 * (1 - d / 175)})`;
+            ctx.lineWidth = 0.6;
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.stroke();
+          }
+        }
+      }
+
       // draw particles
       particles.forEach(p => {
         p.update();
@@ -1179,6 +1266,216 @@
       }, { threshold: 0.5 });
       obs.observe(el);
     });
+  })();
+
+  // ── REDUCED-MOTION FLAG ──
+  const REDUCE = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // ── TEXT-SCRAMBLE DECODE ON SECTION TITLES ──
+  (function() {
+    if (REDUCE) return;
+    const chars = '!<>-_\\/[]{}=+*^?#abcdef0123456789';
+    function scramble(el, final) {
+      const len = final.length;
+      const reveal = Array.from({ length: len }, (_, i) =>
+        Math.floor((i / len) * 18) + Math.floor(Math.random() * 6));
+      let frame = 0;
+      (function tick() {
+        let out = '';
+        for (let i = 0; i < len; i++) {
+          if (final[i] === ' ') { out += ' '; continue; }
+          out += frame >= reveal[i]
+            ? final[i]
+            : chars[Math.floor(Math.random() * chars.length)];
+        }
+        el.textContent = out;
+        if (frame++ < 30) requestAnimationFrame(tick);
+        else el.textContent = final;
+      })();
+    }
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          scramble(e.target, e.target.textContent.trim());
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll('.section-title').forEach(el => obs.observe(el));
+  })();
+
+  // ── CARD 3D TILT + CURSOR GLOW ──
+  (function() {
+    document.querySelectorAll('.skill-group, .edu-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transition = 'transform 0.1s ease-out, border-color 0.3s, box-shadow 0.3s';
+      });
+      card.addEventListener('mousemove', (e) => {
+        const r = card.getBoundingClientRect();
+        const px = (e.clientX - r.left) / r.width;
+        const py = (e.clientY - r.top) / r.height;
+        card.style.setProperty('--mx', (px * 100) + '%');
+        card.style.setProperty('--my', (py * 100) + '%');
+        if (REDUCE) return;
+        const rx = (py - 0.5) * -8;
+        const ry = (px - 0.5) * 8;
+        card.style.transform =
+          `perspective(800px) rotateX(${rx}deg) rotateY(${ry}deg) translateY(-4px)`;
+      });
+      card.addEventListener('mouseleave', () => {
+        card.style.transition = 'transform 0.5s ease, border-color 0.3s, box-shadow 0.3s';
+        card.style.transform = '';
+        card.style.setProperty('--mx', '50%');
+        card.style.setProperty('--my', '50%');
+      });
+    });
+  })();
+
+  // ── MAGNETIC HERO BUTTONS ──
+  (function() {
+    if (REDUCE) return;
+    document.querySelectorAll('.hero-cta a').forEach(btn => {
+      btn.addEventListener('mousemove', (e) => {
+        const r = btn.getBoundingClientRect();
+        const x = e.clientX - (r.left + r.width / 2);
+        const y = e.clientY - (r.top + r.height / 2);
+        btn.style.transform = `translate(${x * 0.4}px, ${y * 0.4 - 2}px)`;
+      });
+      btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+    });
+  })();
+
+  // ── TIMELINE DRAW TRIGGER ──
+  (function() {
+    const tl = document.querySelector('.timeline');
+    if (!tl) return;
+    const obs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { tl.classList.add('drawn'); obs.unobserve(tl); }
+      });
+    }, { threshold: 0.05 });
+    obs.observe(tl);
+  })();
+
+  // ── TERMINAL BOOT INTRO (once per session) ──
+  (function() {
+    if (REDUCE || sessionStorage.getItem('booted')) return;
+    sessionStorage.setItem('booted', '1');
+
+    const boot = document.createElement('div');
+    boot.id = 'boot';
+    const inner = document.createElement('div');
+    inner.className = 'boot-inner';
+    boot.appendChild(inner);
+    document.body.appendChild(boot);
+    document.body.style.overflow = 'hidden';
+
+    const lines = [
+      '> initializing portfolio.exe',
+      '> loading modules [backend · geospatial · ai] ... ok',
+      '> establishing uplink to ryan_karl_laab ... ok',
+      '> compiling 12+ years of experience ... done',
+    ];
+    let li = 0, ci = 0, buffer = '';
+
+    (function type() {
+      if (li >= lines.length) { return loadBar(); }
+      const line = lines[li];
+      if (ci <= line.length) {
+        inner.textContent = buffer + line.slice(0, ci) + '▮';
+        ci++;
+        setTimeout(type, 16 + Math.random() * 26);
+      } else {
+        buffer += line + '\n';
+        li++; ci = 0;
+        setTimeout(type, 190);
+      }
+    })();
+
+    // ── PROGRESS BAR ──
+    function loadBar() {
+      buffer += '\n> booting ';
+      const SLOTS = 24;
+      let pct = 0;
+
+      (function step() {
+        // ease-out: faster at the start, slower near the end
+        pct += Math.max(1, Math.round((100 - pct) * 0.08));
+        if (pct > 100) pct = 100;
+        const filled = Math.round((pct / 100) * SLOTS);
+        const bar = '█'.repeat(filled) + '░'.repeat(SLOTS - filled);
+        const label = String(pct).padStart(3, ' ');
+        inner.textContent = buffer + '[' + bar + '] ' + label + '%';
+        if (pct < 100) {
+          setTimeout(step, 28 + Math.random() * 40);
+        } else {
+          buffer += '[' + bar + '] 100%\n> ready_';
+          inner.textContent = buffer;
+          finish();
+        }
+      })();
+    }
+
+    function finish() {
+      setTimeout(() => {
+        boot.classList.add('done');
+        document.body.style.overflow = '';
+        setTimeout(() => boot.remove(), 550);
+      }, 450);
+    }
+  })();
+
+  // ── KONAMI EASTER EGG → MATRIX-RAIN BURST ──
+  (function() {
+    const seq = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown',
+                 'ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+    let pos = 0, active = false;
+
+    window.addEventListener('keydown', (e) => {
+      const key = e.key.length === 1 ? e.key.toLowerCase() : e.key;
+      if (key === seq[pos]) {
+        if (++pos === seq.length) { pos = 0; if (!active) rain(); }
+      } else {
+        pos = (key === seq[0]) ? 1 : 0;
+      }
+    });
+
+    function rain() {
+      active = true;
+      const c = document.createElement('canvas');
+      c.style.cssText = 'position:fixed;inset:0;z-index:9998;pointer-events:none;transition:opacity 0.8s ease;';
+      document.body.appendChild(c);
+      const ctx = c.getContext('2d');
+      const W = c.width = innerWidth, H = c.height = innerHeight;
+      const size = 16, cols = Math.floor(W / size);
+      const drops = Array.from({ length: cols }, () => Math.random() * -H / size);
+      const glyphs = 'アカサタナハマ0123456789<>{}[]=+*ABCDEF'.split('');
+      let frames = 0;
+
+      (function step() {
+        ctx.fillStyle = 'rgba(8,13,26,0.12)';
+        ctx.fillRect(0, 0, W, H);
+        ctx.font = size + 'px monospace';
+        for (let i = 0; i < cols; i++) {
+          const ch = glyphs[Math.floor(Math.random() * glyphs.length)];
+          const y = drops[i] * size;
+          ctx.fillStyle = Math.random() > 0.975 ? '#f0f4ff' : '#00d4e8';
+          ctx.fillText(ch, i * size, y);
+          if (y > H && Math.random() > 0.975) drops[i] = 0;
+          drops[i]++;
+        }
+        if (frames++ < 260) requestAnimationFrame(step);
+        else { c.style.opacity = '0'; setTimeout(() => { c.remove(); active = false; }, 850); }
+      })();
+
+      const toast = document.createElement('div');
+      toast.textContent = '⌁ cheat mode unlocked';
+      toast.style.cssText = 'position:fixed;bottom:1.5rem;left:50%;transform:translateX(-50%);z-index:9999;'
+        + 'font-family:JetBrains Mono,monospace;font-size:12px;color:#00d4e8;background:rgba(8,13,26,0.92);'
+        + 'border:1px solid rgba(0,212,232,0.4);padding:0.5rem 1rem;border-radius:6px;transition:opacity 0.5s;';
+      document.body.appendChild(toast);
+      setTimeout(() => { toast.style.opacity = '0'; setTimeout(() => toast.remove(), 500); }, 2600);
+    }
   })();
   </script>
 </body>
