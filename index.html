@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ryan Karl D. La-ab — Senior Backend Engineer</title>
-  <meta name="description" content="Ryan Karl La-ab — Senior Backend Engineer with 12+ years building Laravel APIs, Python data pipelines and LiDAR / geospatial processing systems." />
+  <title>Ryan Karl D. La-ab — Senior Full-Stack Developer</title>
+  <meta name="description" content="Ryan Karl La-ab — Senior Full-Stack Developer with 12+ years in PHP/Laravel, Python and JavaScript. Builds LiDAR processing at ScanX and the AI music app Toneliq." />
   <meta name="theme-color" content="#050608" />
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Ryan Karl La-ab — Senior Backend Engineer" />
-  <meta property="og:description" content="12+ years building Laravel APIs, Python data pipelines and LiDAR / geospatial processing systems." />
+  <meta property="og:title" content="Ryan Karl La-ab — Senior Full-Stack Developer" />
+  <meta property="og:description" content="12+ years in PHP/Laravel, Python and JavaScript. LiDAR processing at ScanX, and the AI music practice app Toneliq." />
   <meta name="twitter:card" content="summary" />
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23050608'/%3E%3Ctext x='50%25' y='54%25' dominant-baseline='middle' text-anchor='middle' font-family='Arial,sans-serif' font-weight='700' font-size='30' fill='%233b82f6'%3ERL%3C/text%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -430,38 +430,183 @@
 
     .timeline-item.earlier .timeline-bullets li { font-size: 0.9rem; }
 
-    /* ── PROJECTS ── */
-    .project-card {
+    /* ── PORTFOLIO ── */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+
+    .work-card {
+      display: flex;
+      flex-direction: column;
       background: linear-gradient(180deg, var(--surface-2), var(--surface));
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 1.75rem 2rem;
-      transition: border-color 0.25s;
+      border-radius: 16px;
+      padding: 1.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.25s;
     }
 
-    .project-card:hover { border-color: rgba(59, 130, 246, 0.4); }
+    .work-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue), transparent 70%);
+    }
 
-    .project-head {
+    .work-card:hover { border-color: rgba(59, 130, 246, 0.45); transform: translateY(-3px); }
+
+    .work-card.featured { grid-column: 1 / -1; }
+
+    .work-head {
       display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 0.5rem 1rem;
-      margin-bottom: 0.35rem;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
     }
 
-    .project-name {
+    .work-mark {
+      flex: none;
+      width: 46px; height: 46px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
       font-family: 'Space Grotesk', sans-serif;
-      font-size: 1.35rem;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue-bright), var(--blue-deep));
+      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+    }
+
+    .work-name {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.4rem;
       font-weight: 700;
       color: var(--white);
+      line-height: 1.2;
     }
 
-    .project-meta { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); }
+    .work-tagline { font-size: 0.95rem; color: var(--blue-bright); font-weight: 500; }
 
-    .project-role { color: var(--blue-bright); font-size: 0.95rem; font-weight: 500; margin-bottom: 1rem; }
+    .work-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 1rem;
+    }
 
-    .project-card .timeline-bullets { margin-bottom: 1.25rem; }
+    .work-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      color: var(--muted);
+      padding: 0.15rem 0.55rem;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+    }
+
+    .work-badge.status { color: #4ade80; border-color: rgba(74, 222, 128, 0.3); }
+
+    .work-desc { font-size: 0.95rem; color: var(--text); margin-bottom: 1.25rem; }
+
+    .work-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .metric {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.7rem 0.85rem;
+    }
+
+    .metric-value {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+    }
+
+    .metric-value span { color: var(--blue-bright); }
+
+    .metric-label { font-size: 12px; color: var(--muted); line-height: 1.4; margin-top: 0.15rem; }
+
+    .work-card .timeline-bullets { margin-bottom: 1.25rem; }
+    .work-card .timeline-bullets li { font-size: 0.9rem; }
+
+    .work-foot {
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding-top: 1.1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    .work-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--blue-bright);
+      text-decoration: none;
+      white-space: nowrap;
+    }
+
+    .work-link:hover { color: var(--white); }
+    .work-link svg { width: 15px; height: 15px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    .featured-body {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      gap: 0 2rem;
+    }
+
+    /* ── EARLIER EXPERIENCE ── */
+    .earlier {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px dashed var(--border-strong);
+    }
+
+    .earlier-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 1rem;
+    }
+
+    .earlier-list {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 0.75rem;
+    }
+
+    .earlier-list li {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 0.9rem 1.1rem;
+      font-size: 0.9rem;
+    }
+
+    .earlier-list strong { color: var(--white); font-weight: 600; }
+    .earlier-list .when { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--muted); display: block; margin-bottom: 0.2rem; }
+
+    .role-summary { color: var(--text); font-size: 0.95rem; margin-bottom: 0.9rem; max-width: 860px; }
+    .role-summary a { color: var(--blue-bright); }
 
     /* ── EDUCATION ── */
     .edu-card {
@@ -583,7 +728,12 @@
       .timeline-dot { left: calc(-1.5rem - 5px); }
       .timeline-meta { flex-direction: column; gap: 0.1rem; }
       .timeline-period { margin-left: 0; }
-      .project-card { padding: 1.4rem 1.25rem; }
+      .portfolio-grid, .featured-body { grid-template-columns: 1fr; }
+      .work-card { padding: 1.35rem 1.2rem; }
+      .work-metrics { grid-template-columns: 1fr; }
+      .metric { display: flex; align-items: baseline; gap: 0.6rem; }
+      .metric-label { margin-top: 0; }
+      .earlier-list { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -596,8 +746,8 @@
   <nav>
     <a class="nav-logo" href="#top">ryan<span>.</span>laab</a>
     <ul class="nav-links">
+      <li><a href="#portfolio">Portfolio</a></li>
       <li><a href="#experience">Experience</a></li>
-      <li><a href="#projects">Projects</a></li>
       <li><a href="#skills">Skills</a></li>
       <li><a href="#education">Education</a></li>
       <li class="nav-cta"><a href="#contact">Contact</a></li>
@@ -609,8 +759,8 @@
     <div class="hero-inner">
       <p class="hero-label"><span class="pulse"></span>Available for opportunities</p>
       <h1>Ryan Karl <span class="accent">La-ab</span></h1>
-      <p class="hero-role">Senior Backend Engineer</p>
-      <p class="hero-focus"><span>Laravel</span> APIs · <span>Python</span> pipelines · <span>LiDAR / GIS</span> · AWS</p>
+      <p class="hero-role">Senior Full-Stack Developer</p>
+      <p class="hero-focus"><span>Laravel</span> · <span>Python</span> · <span>LiDAR / GIS</span> · <span>AI integration</span></p>
 
       <div class="hero-stats">
         <div class="stat-item">
@@ -618,20 +768,21 @@
           <div class="stat-label">Years experience</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">5<span>yr</span></div>
-          <div class="stat-label">At current role</div>
+          <div class="stat-number">100<span>GB</span></div>
+          <div class="stat-label">LiDAR scans processed</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">100<span>GB</span></div>
-          <div class="stat-label">Files processed</div>
+          <div class="stat-number">3,900<span>+</span></div>
+          <div class="stat-label">Commits on ScanX</div>
         </div>
       </div>
 
       <p class="hero-bio">
-        I build backend systems and geospatial data pipelines — currently at a Japan-based SaaS company
-        where I've spent 5 years engineering LiDAR processing workflows, REST APIs in Laravel, and
-        3D visualization with Cesium. I work across the full stack when needed, and I use AI tooling
-        deliberately to move faster without cutting corners.
+        Full-stack developer working in PHP/Laravel, Python and JavaScript. For the past five years
+        I've been the main backend developer on ScanX, a cloud platform that processes LiDAR scans of
+        up to 100&nbsp;GB. I use Claude Code and Codex every day, and in 2026 I used them to build two
+        products of my own: Toneliq, an AI music practice app, and Shepherd, a check-in system for
+        church kids' ministries.
       </p>
 
       <div class="hero-cta">
@@ -639,7 +790,7 @@
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           Get in touch
         </a>
-        <a class="btn-ghost" href="#experience">View experience</a>
+        <a class="btn-ghost" href="#portfolio">See my work</a>
         <!-- Add resume.pdf to the repo, then uncomment:
         <a class="btn-ghost" href="resume.pdf" download>Download résumé</a>
         -->
@@ -649,6 +800,185 @@
 
   <main>
 
+    <!-- PORTFOLIO -->
+    <section id="portfolio">
+      <div class="reveal">
+        <p class="section-label">Portfolio</p>
+        <h2 class="section-title">What I've built</h2>
+      </div>
+
+      <div class="portfolio-grid">
+
+        <!-- ScanX -->
+        <article class="work-card featured reveal">
+          <div class="work-head">
+            <div class="work-mark" aria-hidden="true">Sx</div>
+            <div>
+              <h3 class="work-name">ScanX</h3>
+              <p class="work-tagline">Cloud platform for drone, terrestrial and mobile LiDAR scans</p>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-badge">Senior Backend Developer · LocusBlue</span>
+            <span class="work-badge">2021 – Present</span>
+            <span class="work-badge status">In production</span>
+          </div>
+
+          <div class="featured-body">
+            <div>
+              <p class="work-desc">
+                I work across ScanX's Laravel API, Python processing workers, Vue/CesiumJS viewer and GIS tools —
+                from point-cloud classification and job orchestration on AWS to billing and the 3D viewer.
+              </p>
+              <div class="work-metrics">
+                <div class="metric">
+                  <div class="metric-value">0.22<span>→</span>0.84</div>
+                  <div class="metric-label">Roof classification F1</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-value">28<span>→</span>19 min</div>
+                  <div class="metric-label">Edits on a 617M-point file</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-value">100<span> GB</span></div>
+                  <div class="metric-label">Upload limit after EBS move</div>
+                </div>
+              </div>
+            </div>
+            <ul class="timeline-bullets">
+              <li>New Python processing pipeline replacing the PHP job runner — 20+ GIS jobs ported with matching output, in production since October 2026</li>
+              <li>Point-cloud classification for roofs, power lines, poles, guardrails and vegetation (power lines F1 0.16 → 0.80)</li>
+              <li>AWS Batch + SQS job setup with sized queues, standby workers and chained jobs</li>
+              <li>Moved the whole pipeline from Windows LAStools under Wine to native 64-bit Linux</li>
+              <li>CesiumJS viewer: measurements, intensity display, 3D Tiles 1.1 and Gaussian Splat output</li>
+            </ul>
+          </div>
+
+          <div class="work-foot">
+            <div class="project-tags">
+              <span class="skill-tag">Laravel</span>
+              <span class="skill-tag">Python</span>
+              <span class="skill-tag">AWS Batch</span>
+              <span class="skill-tag">SQS</span>
+              <span class="skill-tag">Vue</span>
+              <span class="skill-tag">CesiumJS</span>
+              <span class="skill-tag">PDAL</span>
+            </div>
+            <a class="work-link" href="https://scanx.jp/" target="_blank" rel="noopener">
+              scanx.jp
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Toneliq -->
+        <article class="work-card reveal">
+          <div class="work-head">
+            <div class="work-mark" aria-hidden="true">Tq</div>
+            <div>
+              <h3 class="work-name">Toneliq</h3>
+              <p class="work-tagline">AI music practice app · web &amp; Android</p>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-badge">Founder &amp; sole developer</span>
+            <span class="work-badge">Jul 2026 – Present</span>
+            <span class="work-badge status">Live</span>
+          </div>
+          <p class="work-desc">
+            Upload a song and Toneliq separates the instruments, finds the key, tempo and chords, writes
+            guitar tabs and syncs the lyrics. Transpose it while it plays, loop a section, or generate a new
+            song from a text prompt.
+          </p>
+          <div class="work-metrics">
+            <div class="metric">
+              <div class="metric-value">~66<span> s</span></div>
+              <div class="metric-label">To separate a 4-min song</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value"><span>$</span>0.08</div>
+              <div class="metric-label">Per generated song</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">&lt;4<span> wks</span></div>
+              <div class="metric-label">To ship the Android app</div>
+            </div>
+          </div>
+          <ul class="timeline-bullets">
+            <li>Stem separation, song generation and lyric alignment as GPU jobs on Google Cloud Run, with per-user limits, a concurrency cap and a kill switch</li>
+            <li>Google sign-in, Cloudflare Turnstile and Free/Pro subscriptions through Dodo Payments</li>
+            <li>Android app with Capacitor and Kotlin: lock-screen playback and on-device ML via ONNX Runtime</li>
+            <li>Built with Claude Code from 75 written specs and plans, with 330+ test files</li>
+          </ul>
+          <div class="work-foot">
+            <div class="project-tags">
+              <span class="skill-tag">FastAPI</span>
+              <span class="skill-tag">Angular</span>
+              <span class="skill-tag">Cloud Run GPU</span>
+              <span class="skill-tag">Kotlin</span>
+            </div>
+            <a class="work-link" href="https://toneliq.com" target="_blank" rel="noopener">
+              toneliq.com
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+            </a>
+          </div>
+        </article>
+
+        <!-- Shepherd -->
+        <article class="work-card reveal">
+          <div class="work-head">
+            <div class="work-mark" aria-hidden="true">Sh</div>
+            <div>
+              <h3 class="work-name">Shepherd</h3>
+              <p class="work-tagline">Check-in system for church kids' ministries</p>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-badge">Solo build</span>
+            <span class="work-badge">Jun – Jul 2026</span>
+            <span class="work-badge status">Ready for pilot</span>
+          </div>
+          <p class="work-desc">
+            A web app that replaces paper sign-in sheets for church kids' ministries — check-in, check-out,
+            registration and reports, built in four weeks.
+          </p>
+          <div class="work-metrics">
+            <div class="metric">
+              <div class="metric-value">4<span> wks</span></div>
+              <div class="metric-label">From start to pilot-ready</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">25</div>
+              <div class="metric-label">Backend test suites</div>
+            </div>
+            <div class="metric">
+              <div class="metric-value">Offline<span>-first</span></div>
+              <div class="metric-label">Syncs when Wi-Fi returns</div>
+            </div>
+          </div>
+          <ul class="timeline-bullets">
+            <li>Check-in, check-out, registration and reports all keep working when the church Wi-Fi drops</li>
+            <li>QR-code name stickers that print straight from a phone browser</li>
+            <li>Each church's data kept separate; medical notes visible only to authorized staff, with changes logged</li>
+            <li>Multiple campuses and staff invitations; Playwright end-to-end tests</li>
+          </ul>
+          <div class="work-foot">
+            <div class="project-tags">
+              <span class="skill-tag">Laravel 13</span>
+              <span class="skill-tag">GraphQL</span>
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">React</span>
+            </div>
+            <a class="work-link" href="https://shepherd-frontend-six.vercel.app/" target="_blank" rel="noopener">
+              Live demo
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+            </a>
+          </div>
+        </article>
+
+      </div>
+    </section>
+
     <!-- EXPERIENCE -->
     <section id="experience">
       <div class="reveal">
@@ -657,123 +987,41 @@
       </div>
 
       <div class="timeline">
-
         <div class="timeline-item current reveal">
           <div class="timeline-dot"></div>
           <div class="timeline-meta">
-            <span class="timeline-role">Senior Backend Engineer</span>
-            <span class="timeline-company">LocusBlue (Japan)</span>
-            <span class="timeline-period">2021 – Present · 5 years</span>
+            <span class="timeline-role">Senior Backend Developer</span>
+            <span class="timeline-company">LocusBlue (ScanX)</span>
+            <span class="timeline-period">Jul 2021 – Present</span>
           </div>
+          <p class="role-summary">
+            ScanX is a cloud platform for processing drone, terrestrial and mobile LiDAR scans. I work across its
+            Laravel API, Python worker, Vue/CesiumJS viewer and GIS tools (3,900+ commits).
+          </p>
           <ul class="timeline-bullets">
-            <li>Build and maintain a proprietary LiDAR point cloud processing platform — PHP and Python workers handling large files, orchestrated via AWS Batch</li>
-            <li>Developed a Python-based autoclassification pipeline for LiDAR data, including tree canopy detection, CHM generation, and accuracy benchmarking against a prior MATLAB baseline</li>
-            <li>Designed and executed an EBS migration for AWS Batch jobs, improving throughput and reducing infrastructure costs over EFS</li>
-            <li>Extended a 3D tiling pipeline with custom logic for large-file handling; working on next-gen Cesium 3D Tiles 1.1 output with meshopt compression</li>
-            <li>Built real-time job status push via Laravel Echo; integrated Stripe subscriptions and OpenAI API for an in-app assistant</li>
-            <li>Front-end work in Vue.js + Tailwind; 3D geospatial visualization with Cesium.js</li>
+            <li>Built a new Python processing pipeline to replace our PHP job runner. Ported more than 20 GIS jobs with matching output and released it to production in October 2026; classification now runs much faster on both drone LiDAR and handheld-scanner data</li>
+            <li>Improved point-cloud classification for roofs, power lines, poles, guardrails and vegetation — roof F1 from 0.22 to 0.84 and power lines from 0.16 to 0.80. Wrote a filter that removes false ground points caused by SLAM drift in backpack scans</li>
+            <li>Developed the Python processing behind 3D manual classification (brush and polygon tools in orthographic and perspective views), cutting the time to publish edits on a 617-million-point file from 28 to 19 minutes</li>
+            <li>Co-designed the AWS Batch and SQS job setup with small, medium and large queues, standby workers and chained jobs. Moving temporary storage from EFS to EBS fixed a slowdown that affected every user's jobs and let us raise the upload limit to 100 GB; removed 2 of 3 standby EC2 instances after finding they averaged about 5% utilization</li>
+            <li>Moved the whole processing pipeline from Windows LAStools under Wine to native 64-bit Linux</li>
+            <li>Rebuilt the main API on Laravel 10, then upgraded it to Laravel 12 with refresh tokens, rate limiting and XSS protection. Verified critical vulnerability findings in the API and UI and rotated development credentials after a security review. Built Stripe subscription billing, including trials, proration, plan changes and 3-D Secure</li>
+            <li>Built an admin dashboard that tracks each customer's uploads, projects and processing time against plan limits, flags heavy users and upsell candidates, and has per-account charts and CSV export</li>
+            <li>Developed CesiumJS viewer features: movable measurements, the first version of intensity display, hardware-adaptive viewer settings, and 3D Tiles 1.1 and Gaussian Splat output. Also built a prototype chat assistant on fine-tuned OpenAI models that could start processing jobs</li>
+            <li>Maintain the third-party integrations connected to ScanX, including GeoScan and Kumiki, and handle production support — monitoring customer jobs for failures, finding the cause and shipping the fix</li>
+            <li>Set up my own AI workflow with Claude Code and Codex: each task starts from a written plan, a second agent reviews the plan and code, and I review and test every AI-written change before it ships. Wrote 20 custom skills for routine tasks and a hook that stops agents from reading credentials</li>
           </ul>
         </div>
-
-        <div class="timeline-item reveal">
-          <div class="timeline-dot"></div>
-          <div class="timeline-meta">
-            <span class="timeline-role">Web Developer</span>
-            <span class="timeline-company">Affinigent</span>
-            <span class="timeline-period">2020 – 2021</span>
-          </div>
-          <ul class="timeline-bullets">
-            <li>Revamped and modernized website designs</li>
-            <li>Oversaw website maintenance, updates, and new feature deployment</li>
-          </ul>
-        </div>
-
-        <div class="timeline-item reveal">
-          <div class="timeline-dot"></div>
-          <div class="timeline-meta">
-            <span class="timeline-role">IT Tech Support</span>
-            <span class="timeline-company">ABA International</span>
-            <span class="timeline-period">2016 – 2021</span>
-          </div>
-          <ul class="timeline-bullets">
-            <li>Assisted in managing the company's ERP system</li>
-            <li>Provided technical support across IT infrastructure</li>
-          </ul>
-        </div>
-
-        <div class="timeline-item earlier reveal">
-          <div class="timeline-dot"></div>
-          <div class="timeline-meta">
-            <span class="timeline-role">Web Developer</span>
-            <span class="timeline-company">Innovatech Web Design</span>
-            <span class="timeline-period">2015 – 2016</span>
-          </div>
-          <ul class="timeline-bullets">
-            <li>Implemented mockup designs with custom client-specific functionalities</li>
-            <li>Managed and customized WordPress themes, and developed a booking system</li>
-          </ul>
-        </div>
-
-        <div class="timeline-item earlier reveal">
-          <div class="timeline-dot"></div>
-          <div class="timeline-meta">
-            <span class="timeline-role">Web Developer</span>
-            <span class="timeline-company">Web Simpleworks</span>
-            <span class="timeline-period">2014 – 2015</span>
-          </div>
-          <ul class="timeline-bullets">
-            <li>Built data mining and web scraping tools using WinAutomation</li>
-            <li>Engineered bespoke plugins and integrated cURL/SOAP APIs</li>
-            <li>Created an HRMS in PHP and customized WooCommerce extensions</li>
-            <li>Contributed to an online photo editing application</li>
-          </ul>
-        </div>
-
-        <div class="timeline-item earlier reveal">
-          <div class="timeline-dot"></div>
-          <div class="timeline-meta">
-            <span class="timeline-role">Freelance Web Developer</span>
-            <span class="timeline-company">Independent</span>
-            <span class="timeline-period">2013 – 2014</span>
-          </div>
-          <ul class="timeline-bullets">
-            <li>Built an Online Grade Management System with reporting using CodeIgniter</li>
-            <li>Developed a Subdivision Security System and Car Pass Monitoring System using C# + biometrics</li>
-            <li>Engineered an SMS Voting System for school elections</li>
-          </ul>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- PROJECTS -->
-    <section id="projects">
-      <div class="reveal">
-        <p class="section-label">Projects</p>
-        <h2 class="section-title">What I'm building</h2>
       </div>
 
-      <article class="project-card reveal">
-        <div class="project-head">
-          <h3 class="project-name">Shepherd</h3>
-          <span class="project-meta">Side project · 2026 – Present</span>
-        </div>
-        <p class="project-role">Founder &amp; Full-Stack Engineer</p>
-        <ul class="timeline-bullets">
-          <li>Multi-tenant SaaS Kids Ministry check-in platform for churches — replacing paper-based child registration and attendance with pickup-code workflows</li>
-          <li>Backend in Laravel 13 / PHP 8.4 exposing a GraphQL API (Lighthouse) over PostgreSQL, with a service-layer architecture and Sanctum token auth</li>
-          <li>Architected automatic per-tenant data isolation, scoping every query to the authenticated church</li>
-          <li>React 18 + Vite frontend (Tailwind + Shadcn/UI, Apollo Client) with a feature-based structure and print-ready check-in labels</li>
-          <li>Containerized local dev with Docker Compose; git submodules splitting backend and frontend repos</li>
+      <div class="earlier reveal">
+        <h3 class="earlier-title">Earlier experience</h3>
+        <ul class="earlier-list">
+          <li><span class="when">2020 – 2021</span><strong>Web Developer, Affinigent</strong> — Rebuilt and maintained the company websites.</li>
+          <li><span class="when">2016 – 2021</span><strong>IT Tech Support, ABA International</strong> — Supported the ERP system and IT infrastructure.</li>
+          <li><span class="when">2014 – 2016</span><strong>Web Developer, Innovatech Web Design &amp; Web Simpleworks</strong> — Client websites, a booking system, a PHP HR system and WooCommerce extensions.</li>
+          <li><span class="when">2013 – 2014</span><strong>Freelance Developer</strong> — A grade management system (CodeIgniter), biometric security and SMS voting systems (C#).</li>
         </ul>
-        <div class="project-tags">
-          <span class="skill-tag">Laravel 13</span>
-          <span class="skill-tag">GraphQL</span>
-          <span class="skill-tag">PostgreSQL</span>
-          <span class="skill-tag">React 18</span>
-          <span class="skill-tag">Docker</span>
-        </div>
-      </article>
+      </div>
     </section>
 
     <!-- SKILLS -->
@@ -786,78 +1034,80 @@
       <div class="skill-groups reveal">
 
         <div class="skill-group">
-          <div class="skill-group-title">Back-end</div>
+          <div class="skill-group-title">Languages &amp; frameworks</div>
           <div class="skill-tags">
-            <span class="skill-tag primary">PHP</span>
-            <span class="skill-tag primary">Laravel</span>
-            <span class="skill-tag primary">Python</span>
-            <span class="skill-tag">REST APIs</span>
-            <span class="skill-tag">GraphQL</span>
-            <span class="skill-tag">MySQL</span>
-            <span class="skill-tag">PostgreSQL</span>
-            <span class="skill-tag">Redis</span>
-            <span class="skill-tag">Docker</span>
-            <span class="skill-tag">Laravel Echo</span>
-            <span class="skill-tag">CodeIgniter</span>
+            <span class="skill-tag primary">PHP (Laravel)</span>
+            <span class="skill-tag primary">Python (FastAPI)</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">Vue</span>
+            <span class="skill-tag">Angular</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Kotlin</span>
           </div>
         </div>
 
         <div class="skill-group">
-          <div class="skill-group-title">Cloud (AWS)</div>
+          <div class="skill-group-title">AI &amp; ML</div>
+          <div class="skill-tags">
+            <span class="skill-tag primary">AI integration</span>
+            <span class="skill-tag">Claude Code</span>
+            <span class="skill-tag">Codex</span>
+            <span class="skill-tag">OpenAI API</span>
+            <span class="skill-tag">PyTorch</span>
+            <span class="skill-tag">ONNX Runtime</span>
+            <span class="skill-tag">TensorFlow</span>
+            <span class="skill-tag">scikit-learn</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">Cloud</div>
           <div class="skill-tags">
             <span class="skill-tag primary">AWS Batch</span>
-            <span class="skill-tag">ECS</span>
             <span class="skill-tag">SQS</span>
-            <span class="skill-tag">EFS / EBS</span>
             <span class="skill-tag">S3</span>
-            <span class="skill-tag">CloudWatch</span>
-            <span class="skill-tag">RDS</span>
+            <span class="skill-tag">EC2</span>
+            <span class="skill-tag">ECR</span>
+            <span class="skill-tag">DynamoDB</span>
+            <span class="skill-tag primary">Google Cloud Run (GPU)</span>
+            <span class="skill-tag">Railway</span>
+            <span class="skill-tag">Vercel</span>
+            <span class="skill-tag">Cloudflare R2</span>
+            <span class="skill-tag">Docker</span>
           </div>
         </div>
 
         <div class="skill-group">
-          <div class="skill-group-title">Geospatial / LiDAR</div>
+          <div class="skill-group-title">GIS &amp; 3D</div>
           <div class="skill-tags">
-            <span class="skill-tag primary">LiDAR / LAZ / LAS</span>
-            <span class="skill-tag primary">Point Cloud Processing</span>
-            <span class="skill-tag">Cesium.js</span>
-            <span class="skill-tag">3D Tiles 1.1</span>
+            <span class="skill-tag primary">CesiumJS</span>
             <span class="skill-tag">LAStools</span>
-            <span class="skill-tag">GIS Pipelines</span>
-            <span class="skill-tag">Tree Canopy Detection</span>
+            <span class="skill-tag">PDAL</span>
+            <span class="skill-tag">Open3D</span>
+            <span class="skill-tag">GDAL</span>
           </div>
         </div>
 
         <div class="skill-group">
-          <div class="skill-group-title">Front-end</div>
+          <div class="skill-group-title">Databases</div>
           <div class="skill-tags">
-            <span class="skill-tag">Vue.js</span>
-            <span class="skill-tag">Vuex</span>
-            <span class="skill-tag">React</span>
-            <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">Tailwind CSS</span>
-            <span class="skill-tag">HTML5 / CSS</span>
-            <span class="skill-tag">jQuery</span>
+            <span class="skill-tag primary">PostgreSQL</span>
+            <span class="skill-tag">MySQL</span>
+            <span class="skill-tag">Redis</span>
           </div>
         </div>
 
         <div class="skill-group">
-          <div class="skill-group-title">AI tooling</div>
+          <div class="skill-group-title">Payments &amp; testing</div>
           <div class="skill-tags">
-            <span class="skill-tag">Claude Code</span>
-            <span class="skill-tag">OpenAI API</span>
-            <span class="skill-tag">AI-assisted Development</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <div class="skill-group-title">CMS &amp; Integrations</div>
-          <div class="skill-tags">
-            <span class="skill-tag">WordPress</span>
-            <span class="skill-tag">WooCommerce</span>
             <span class="skill-tag">Stripe</span>
-            <span class="skill-tag">cURL / SOAP</span>
-            <span class="skill-tag">C#</span>
+            <span class="skill-tag">Dodo Payments</span>
+            <span class="skill-tag">PHPUnit</span>
+            <span class="skill-tag">pytest</span>
+            <span class="skill-tag">Vitest</span>
+            <span class="skill-tag">Playwright</span>
+            <span class="skill-tag">Postman</span>
           </div>
         </div>
 
