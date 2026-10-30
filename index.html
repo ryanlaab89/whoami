@@ -617,6 +617,8 @@
       max-width: 520px;
     }
 
+    .edu-card + .edu-card { margin-top: 1rem; }
+
     .edu-degree {
       font-family: 'Space Grotesk', sans-serif;
       font-size: 1.1rem;
@@ -772,15 +774,15 @@
           <div class="stat-label">LiDAR scans processed</div>
         </div>
         <div class="stat-item">
-          <div class="stat-number">3,900<span>+</span></div>
-          <div class="stat-label">Commits on ScanX</div>
+          <div class="stat-number">2–4<span>×</span></div>
+          <div class="stat-label">Faster ground extraction</div>
         </div>
       </div>
 
       <p class="hero-bio">
         Full-stack developer working in PHP/Laravel, Python and JavaScript. For the past five years
-        I've been the main backend developer on ScanX, a cloud platform that processes LiDAR scans of
-        up to 100&nbsp;GB. I use Claude Code and Codex every day, and in 2026 I used them to build two
+        I've been the main backend developer on ScanX, a cloud GIS platform that processes LiDAR scans of
+        up to 100&nbsp;GB, and I'm a Cesium Certified Developer. I use Claude Code and Codex every day, and in 2026 I used them to build two
         products of my own: Toneliq, an AI music practice app, and Shepherd, a check-in system for
         church kids' ministries.
       </p>
@@ -815,12 +817,12 @@
             <div class="work-mark" aria-hidden="true">Sx</div>
             <div>
               <h3 class="work-name">ScanX</h3>
-              <p class="work-tagline">Cloud platform for drone, terrestrial and mobile LiDAR scans</p>
+              <p class="work-tagline">SaaS platform for drone, terrestrial and mobile LiDAR scans</p>
             </div>
           </div>
           <div class="work-meta">
             <span class="work-badge">Senior Backend Developer · LocusBlue</span>
-            <span class="work-badge">2021 – Present</span>
+            <span class="work-badge">Jun 2021 – Present</span>
             <span class="work-badge status">In production</span>
           </div>
 
@@ -846,11 +848,11 @@
               </div>
             </div>
             <ul class="timeline-bullets">
-              <li>New Python processing pipeline replacing the PHP job runner — 20+ GIS jobs ported with matching output, in production since October 2026</li>
-              <li>Point-cloud classification for roofs, power lines, poles, guardrails and vegetation (power lines F1 0.16 → 0.80)</li>
-              <li>AWS Batch + SQS job setup with sized queues, standby workers and chained jobs</li>
-              <li>Moved the whole pipeline from Windows LAStools under Wine to native 64-bit Linux</li>
-              <li>CesiumJS viewer: measurements, intensity display, 3D Tiles 1.1 and Gaussian Splat output</li>
+              <li>New Python processing pipeline replacing the PHP job runner — GIS jobs ported with matching output, in production since October 2026</li>
+              <li>Point-cloud classification for roofs, power lines, poles, guardrails and vegetation: optimized PCA features, guard rules and Optuna-tuned thresholds (power lines F1 0.16 → 0.80)</li>
+              <li>Ground extraction 2–4× faster: downsample, PDAL SMRF, then restore full resolution</li>
+              <li>Parallel, chunked processing that handles very large files, on AWS Batch + SQS queues sized by file size</li>
+              <li>CesiumJS viewer: GeoJSON, KML and shapefile layers, measurements, height profiles, 3D Tiles 1.1 and Gaussian Splat output</li>
             </ul>
           </div>
 
@@ -892,12 +894,12 @@
           </p>
           <div class="work-metrics">
             <div class="metric">
-              <div class="metric-value">~66<span> s</span></div>
-              <div class="metric-label">To separate a 4-min song</div>
+              <div class="metric-value">6<span> tracks</span></div>
+              <div class="metric-label">Split from any song</div>
             </div>
             <div class="metric">
-              <div class="metric-value"><span>$</span>0.08</div>
-              <div class="metric-label">Per generated song</div>
+              <div class="metric-value">2<span> apps</span></div>
+              <div class="metric-label">Web and Android</div>
             </div>
             <div class="metric">
               <div class="metric-value">&lt;4<span> wks</span></div>
@@ -908,14 +910,14 @@
             <li>Stem separation, song generation and lyric alignment as GPU jobs on Google Cloud Run, with per-user limits, a concurrency cap and a kill switch</li>
             <li>Google sign-in, Cloudflare Turnstile and Free/Pro subscriptions through Dodo Payments</li>
             <li>Android app with Capacitor and Kotlin: lock-screen playback and on-device ML via ONNX Runtime</li>
-            <li>Built with Claude Code from 75 written specs and plans, with 330+ test files</li>
+            <li>Unit, integration and end-to-end tests (pytest, Vitest, Playwright)</li>
           </ul>
           <div class="work-foot">
             <div class="project-tags">
               <span class="skill-tag">FastAPI</span>
               <span class="skill-tag">Angular</span>
               <span class="skill-tag">Cloud Run GPU</span>
-              <span class="skill-tag">Kotlin</span>
+              <span class="skill-tag">Capacitor</span>
             </div>
             <a class="work-link" href="https://toneliq.com" target="_blank" rel="noopener">
               toneliq.com
@@ -992,21 +994,25 @@
           <div class="timeline-meta">
             <span class="timeline-role">Senior Backend Developer</span>
             <span class="timeline-company">LocusBlue (ScanX)</span>
-            <span class="timeline-period">Jul 2021 – Present</span>
+            <span class="timeline-period">Jun 2021 – Present</span>
           </div>
           <p class="role-summary">
-            ScanX is a cloud platform for processing drone, terrestrial and mobile LiDAR scans. I work across its
-            Laravel API, Python worker, Vue/CesiumJS viewer and GIS tools (3,900+ commits).
+            ScanX is a SaaS platform for processing drone, terrestrial and mobile LiDAR scans. I work across its
+            Laravel API, Python worker, Vue/CesiumJS viewer and GIS tools.
           </p>
           <ul class="timeline-bullets">
-            <li>Built a new Python processing pipeline to replace our PHP job runner. Ported more than 20 GIS jobs with matching output and released it to production in October 2026; classification now runs much faster on both drone LiDAR and handheld-scanner data</li>
-            <li>Improved point-cloud classification for roofs, power lines, poles, guardrails and vegetation — roof F1 from 0.22 to 0.84 and power lines from 0.16 to 0.80. Wrote a filter that removes false ground points caused by SLAM drift in backpack scans</li>
+            <li>Built a new Python processing pipeline to replace our PHP job runner. Ported the GIS processing jobs with matching output and released it to production in October 2026. Classification now runs much faster on both drone LiDAR and handheld-scanner data</li>
+            <li>Made the GIS processing jobs reliable on very large files. They split point clouds into chunks that run in parallel, keep an out-of-memory failure from crashing the whole job, and retry failed parts. Replaced a MATLAB cross-section classifier that ran for 8 hours and timed out on a 5.7 GB file with a parallel Python version</li>
+            <li>Improved point-cloud classification for roofs, power lines, poles, guardrails and vegetation. Optimized the PCA-based shape features, added guard rules against common misclassifications, and tuned the classification thresholds with Optuna against hand-labelled scans, running the training jobs on AWS Batch. Roof F1 went from 0.22 to 0.84 and power lines from 0.16 to 0.80</li>
+            <li>Made ground extraction 2–4× faster with a new pipeline. It downsamples the point cloud, runs PDAL SMRF tuned for area-based ground extraction, then restores the result to full resolution. Wrote a filter that removes false ground points caused by SLAM drift in backpack scans</li>
             <li>Developed the Python processing behind 3D manual classification (brush and polygon tools in orthographic and perspective views), cutting the time to publish edits on a 617-million-point file from 28 to 19 minutes</li>
-            <li>Co-designed the AWS Batch and SQS job setup with small, medium and large queues, standby workers and chained jobs. Moving temporary storage from EFS to EBS fixed a slowdown that affected every user's jobs and let us raise the upload limit to 100 GB; removed 2 of 3 standby EC2 instances after finding they averaged about 5% utilization</li>
+            <li>Co-designed and developed the AWS Batch and SQS job setup. Jobs go to small, medium or large queues by file size, so quick jobs don't wait behind large scans, and standby workers run small jobs right away with no wait for AWS Batch to start a machine. Moving temporary storage from EFS to EBS fixed a slowdown that affected every user's jobs and let us raise the upload limit to 100 GB; removed 2 of 3 standby EC2 instances after finding they averaged about 5% utilization</li>
             <li>Moved the whole processing pipeline from Windows LAStools under Wine to native 64-bit Linux</li>
-            <li>Rebuilt the main API on Laravel 10, then upgraded it to Laravel 12 with refresh tokens, rate limiting and XSS protection. Verified critical vulnerability findings in the API and UI and rotated development credentials after a security review. Built Stripe subscription billing, including trials, proration, plan changes and 3-D Secure</li>
+            <li>Worked extensively on the SaaS side of the Laravel API: multi-tenant accounts, roles and permissions, project and folder access, and subscription plans. Helped build subscription billing on Stripe, including trials, proration, plan changes and 3-D Secure</li>
+            <li>Rebuilt the main API on Laravel 10, then upgraded it to Laravel 12 with refresh tokens, rate limiting and XSS protection. Verified critical vulnerability findings in the API and UI and rotated development credentials after a security review</li>
             <li>Built an admin dashboard that tracks each customer's uploads, projects and processing time against plan limits, flags heavy users and upsell candidates, and has per-account charts and CSV export</li>
-            <li>Developed CesiumJS viewer features: movable measurements, the first version of intensity display, hardware-adaptive viewer settings, and 3D Tiles 1.1 and Gaussian Splat output. Also built a prototype chat assistant on fine-tuned OpenAI models that could start processing jobs</li>
+            <li>Built GIS and 3D features in the Vue and CesiumJS viewer: GeoJSON, KML and shapefile layers, measurements (distance, angle, height and area, with snapping to control points), height profiles, cross sections, 2D map mode, clipping, and cut-and-fill volume</li>
+            <li>Improved viewer performance by tuning level of detail and memory to each device's GPU, and upgraded Cesium from 1.109 to 1.131. Added intensity and elevation coloring, 3D Tiles 1.1 and Gaussian Splat output, and imports for LandXML, DXF, IFC and GLB models. Also built a prototype chat assistant on fine-tuned OpenAI models that could start processing jobs</li>
             <li>Maintain the third-party integrations connected to ScanX, including GeoScan and Kumiki, and handle production support — monitoring customer jobs for failures, finding the cause and shipping the fix</li>
             <li>Set up my own AI workflow with Claude Code and Codex: each task starts from a written plan, a second agent reviews the plan and code, and I review and test every AI-written change before it ships. Wrote 20 custom skills for routine tasks and a hook that stops agents from reading credentials</li>
           </ul>
@@ -1017,8 +1023,9 @@
         <h3 class="earlier-title">Earlier experience</h3>
         <ul class="earlier-list">
           <li><span class="when">2020 – 2021</span><strong>Web Developer, Affinigent</strong> — Rebuilt and maintained the company websites.</li>
-          <li><span class="when">2016 – 2021</span><strong>IT Tech Support, ABA International</strong> — Supported the ERP system and IT infrastructure.</li>
-          <li><span class="when">2014 – 2016</span><strong>Web Developer, Innovatech Web Design &amp; Web Simpleworks</strong> — Client websites, a booking system, a PHP HR system and WooCommerce extensions.</li>
+          <li><span class="when">2016 – 2020</span><strong>IT Tech Support, ABA International</strong> — Supported the ERP system and IT infrastructure.</li>
+          <li><span class="when">2015</span><strong>Web Developer, Innovatech Web Design</strong> — Client sites and a booking system.</li>
+          <li><span class="when">2014</span><strong>Web Developer, Web Simpleworks</strong> — PHP HR system, WooCommerce extensions, SOAP integrations and web scraping.</li>
           <li><span class="when">2013 – 2014</span><strong>Freelance Developer</strong> — A grade management system (CodeIgniter), biometric security and SMS voting systems (C#).</li>
         </ul>
       </div>
@@ -1034,47 +1041,13 @@
       <div class="skill-groups reveal">
 
         <div class="skill-group">
-          <div class="skill-group-title">Languages &amp; frameworks</div>
+          <div class="skill-group-title">Backend</div>
           <div class="skill-tags">
             <span class="skill-tag primary">PHP (Laravel)</span>
             <span class="skill-tag primary">Python (FastAPI)</span>
-            <span class="skill-tag">JavaScript</span>
-            <span class="skill-tag">TypeScript</span>
-            <span class="skill-tag">Vue</span>
-            <span class="skill-tag">Angular</span>
-            <span class="skill-tag">React</span>
-            <span class="skill-tag">Kotlin</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <div class="skill-group-title">AI &amp; ML</div>
-          <div class="skill-tags">
-            <span class="skill-tag primary">AI integration</span>
-            <span class="skill-tag">Claude Code</span>
-            <span class="skill-tag">Codex</span>
-            <span class="skill-tag">OpenAI API</span>
-            <span class="skill-tag">PyTorch</span>
-            <span class="skill-tag">ONNX Runtime</span>
-            <span class="skill-tag">TensorFlow</span>
-            <span class="skill-tag">scikit-learn</span>
-          </div>
-        </div>
-
-        <div class="skill-group">
-          <div class="skill-group-title">Cloud</div>
-          <div class="skill-tags">
-            <span class="skill-tag primary">AWS Batch</span>
-            <span class="skill-tag">SQS</span>
-            <span class="skill-tag">S3</span>
-            <span class="skill-tag">EC2</span>
-            <span class="skill-tag">ECR</span>
-            <span class="skill-tag">DynamoDB</span>
-            <span class="skill-tag primary">Google Cloud Run (GPU)</span>
-            <span class="skill-tag">Railway</span>
-            <span class="skill-tag">Vercel</span>
-            <span class="skill-tag">Cloudflare R2</span>
-            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">REST APIs</span>
+            <span class="skill-tag">GraphQL</span>
+            <span class="skill-tag">Socket.IO</span>
           </div>
         </div>
 
@@ -1084,8 +1057,30 @@
             <span class="skill-tag primary">CesiumJS</span>
             <span class="skill-tag">LAStools</span>
             <span class="skill-tag">PDAL</span>
-            <span class="skill-tag">Open3D</span>
             <span class="skill-tag">GDAL</span>
+            <span class="skill-tag">Open3D</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">Cloud &amp; DevOps</div>
+          <div class="skill-tags">
+            <span class="skill-tag primary">AWS Batch</span>
+            <span class="skill-tag">SQS</span>
+            <span class="skill-tag">S3</span>
+            <span class="skill-tag">EC2</span>
+            <span class="skill-tag">ECR</span>
+            <span class="skill-tag">DynamoDB</span>
+            <span class="skill-tag primary">Google Cloud Run (GPU)</span>
+            <span class="skill-tag">Docker</span>
+            <span class="skill-tag">GitHub Actions (CI/CD)</span>
+            <span class="skill-tag">Linux</span>
+            <span class="skill-tag">Bash</span>
+            <span class="skill-tag">Git</span>
+            <span class="skill-tag">Sentry</span>
+            <span class="skill-tag">Railway</span>
+            <span class="skill-tag">Vercel</span>
+            <span class="skill-tag">Cloudflare R2</span>
           </div>
         </div>
 
@@ -1095,6 +1090,33 @@
             <span class="skill-tag primary">PostgreSQL</span>
             <span class="skill-tag">MySQL</span>
             <span class="skill-tag">Redis</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">AI &amp; ML</div>
+          <div class="skill-tags">
+            <span class="skill-tag primary">AI integration</span>
+            <span class="skill-tag">Claude Code</span>
+            <span class="skill-tag">Codex</span>
+            <span class="skill-tag">Claude API (Anthropic)</span>
+            <span class="skill-tag">OpenAI API</span>
+            <span class="skill-tag">PyTorch</span>
+            <span class="skill-tag">ONNX Runtime</span>
+            <span class="skill-tag">TensorFlow</span>
+            <span class="skill-tag">scikit-learn</span>
+          </div>
+        </div>
+
+        <div class="skill-group">
+          <div class="skill-group-title">Frontend &amp; mobile</div>
+          <div class="skill-tags">
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">TypeScript</span>
+            <span class="skill-tag">Vue</span>
+            <span class="skill-tag">Angular</span>
+            <span class="skill-tag">React</span>
+            <span class="skill-tag">Capacitor</span>
           </div>
         </div>
 
@@ -1118,13 +1140,18 @@
     <section id="education">
       <div class="reveal">
         <p class="section-label">Education</p>
-        <h2 class="section-title">Academic background</h2>
+        <h2 class="section-title">Education and certification</h2>
       </div>
 
       <div class="edu-card reveal">
         <p class="edu-degree">B.S. in Information Technology</p>
         <p class="edu-school">Central Philippine University</p>
         <p class="edu-year">2006 – 2011</p>
+      </div>
+
+      <div class="edu-card reveal">
+        <p class="edu-degree">Cesium Certified Developer</p>
+        <p class="edu-school">Certification</p>
       </div>
     </section>
 
@@ -1137,9 +1164,9 @@
       </div>
 
       <div class="contact-links reveal">
-        <a class="contact-link" href="mailto:ryandiezlaab@gmail.com">
+        <a class="contact-link" href="mailto:pentatonics89@gmail.com">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-          ryandiezlaab@gmail.com
+          pentatonics89@gmail.com
         </a>
         <a class="contact-link" href="https://www.linkedin.com/in/ryan-karl-l-b17b15178/" target="_blank" rel="noopener">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
