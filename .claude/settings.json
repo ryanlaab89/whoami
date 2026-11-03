@@ -1,0 +1,13 @@
+{
+  "attribution": {
+    "commit": "",
+    "pr": "",
+    "sessionUrl": false
+  },
+  "env": {
+    "GIT_AUTHOR_NAME": "ryanlaab89",
+    "GIT_AUTHOR_EMAIL": "pentatonics89@gmail.com",
+    "GIT_COMMITTER_NAME": "ryanlaab89",
+    "GIT_COMMITTER_EMAIL": "pentatonics89@gmail.com"
+  }
+}

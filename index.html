@@ -873,6 +873,68 @@
           </div>
         </article>
 
+        <!-- TerraViewer -->
+        <article class="work-card featured reveal">
+          <div class="work-head">
+            <div class="work-mark" aria-hidden="true">Tv</div>
+            <div>
+              <h3 class="work-name">TerraViewer</h3>
+              <p class="work-tagline">Lightweight 3D viewer for LAS/LAZ point clouds</p>
+            </div>
+          </div>
+          <div class="work-meta">
+            <span class="work-badge">Solo build</span>
+            <span class="work-badge">Oct 2026 – Present</span>
+            <span class="work-badge status">Live demo · v0.1</span>
+          </div>
+
+          <div class="featured-body">
+            <div>
+              <p class="work-desc">
+                Upload a LAS or LAZ point cloud, confirm its coordinate system, and TerraViewer tiles it to
+                3D Tiles and opens it in a CesiumJS viewer with colour styling and saved measurements.
+              </p>
+              <div class="work-metrics">
+                <div class="metric">
+                  <div class="metric-value">10.6M<span> pts</span></div>
+                  <div class="metric-label">Tiled in 43 seconds</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-value">⅓<span> size</span></div>
+                  <div class="metric-label">3D Tiles 1.1 vs 1.0</div>
+                </div>
+                <div class="metric">
+                  <div class="metric-value">5</div>
+                  <div class="metric-label">Measurement tools</div>
+                </div>
+              </div>
+            </div>
+            <ul class="timeline-bullets">
+              <li>Reads each file's LAS header in the browser to confirm the coordinate system before upload, and never guesses one silently</li>
+              <li>GIS worker with PDAL, GDAL and PROJ inspects files, converts LAS to LAZ and tiles them with GoTiler</li>
+              <li>Uploads go straight from the browser to Cloudflare R2 through presigned URLs; tilesets are served as signed JSON</li>
+              <li>Inspect, distance, horizontal distance, height difference and plan area tools, saved per dataset</li>
+              <li>Split across UI, API, worker and infrastructure repos; deployed on Vercel and Railway</li>
+            </ul>
+          </div>
+
+          <div class="work-foot">
+            <div class="project-tags">
+              <span class="skill-tag">Vue 3</span>
+              <span class="skill-tag">CesiumJS</span>
+              <span class="skill-tag">Django</span>
+              <span class="skill-tag">PostgreSQL</span>
+              <span class="skill-tag">PDAL</span>
+              <span class="skill-tag">GDAL</span>
+              <span class="skill-tag">Cloudflare R2</span>
+            </div>
+            <a class="work-link" href="https://terraviewer.vercel.app/" target="_blank" rel="noopener">
+              terraviewer.vercel.app
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17 17 7"/><path d="M8 7h9v9"/></svg>
+            </a>
+          </div>
+        </article>
+
         <!-- Toneliq -->
         <article class="work-card reveal">
           <div class="work-head">
